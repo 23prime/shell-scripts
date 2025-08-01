@@ -1,0 +1,71 @@
+version: '3'
+
+tasks:
+  # General tasks
+  setup:
+    desc: 'Setup tools'
+    cmds:
+    - mise install
+
+  versions:
+    desc: 'Show tool versions'
+    cmds:
+    - shellcheck --version
+    - shfmt --version
+    - markdownlint --version
+    - actionlint --version
+
+  link:
+    desc: 'Create symlinks'
+    cmds:
+    - chmod +x ./link.sh
+    - ./link.sh {{.CLI_ARGS}}
+
+  check:
+    desc: 'Check'
+    deps:
+    - sh:check
+    - md:check
+    - github:validate-workflow
+
+  # Shell tasks
+  sh:check:
+    desc: 'Check shell scripts'
+    cmds:
+    - task: sh:fmt
+    - task: sh:lint
+
+  sh:lint:
+    desc: 'Lint shell scripts'
+    cmds:
+    - shellcheck src/*.sh
+
+  sh:fmt:
+    desc: 'Format shell scripts'
+    cmds:
+    - shfmt -i 4 -w src/*.sh
+
+  # Markdown linting tasks
+  md:check:
+    desc: "Check Markdown"
+    cmds:
+    - task: md:fix
+    - task: md:lint
+
+  md:fix:
+    desc: "Auto fix Markdown"
+    cmds:
+    - task: md:lint-fix
+
+  md:lint:
+    desc: "Run markdownlint on project markdown files"
+    cmd: markdownlint *.md
+
+  md:lint-fix:
+    desc: "Fix markdownlint issues automatically"
+    cmd: markdownlint *.md --fix
+
+  # GitHub Actions tasks
+  github:validate-workflow:
+    desc: "Validate GitHub Actions workflow"
+    cmd: actionlint .github/workflows/*.yml

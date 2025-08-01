@@ -1,0 +1,7 @@
+{
+  "recommendations": [
+    "task.vscode-task",
+    "timonwong.shellcheck",
+    "mkhl.shfmt"
+  ]
+}

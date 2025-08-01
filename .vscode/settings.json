@@ -1,0 +1,7 @@
+{
+  // Shell
+  "[shellscript]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "mkhl.shfmt",
+  }
+}

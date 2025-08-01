@@ -1,0 +1,10 @@
+[tools]
+# Shell
+shellcheck = "0.10"
+shfmt = "3"
+
+# Markdown
+"npm:markdownlint-cli" = "latest"
+
+# GitHub Actions
+actionlint = "latest"

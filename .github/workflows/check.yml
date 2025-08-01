@@ -1,0 +1,37 @@
+name: Check Shell Scripts
+
+on:
+  push:
+    paths:
+      - 'src/*.sh'
+      - '.github/workflows/check.yml'
+  pull_request:
+    paths:
+      - 'src/*.sh'
+      - '.github/workflows/check.yml'
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Install Task
+      uses: arduino/setup-task@v2
+
+    - name: Install mise and setup
+      uses: jdx/mise-action@v2
+      with:
+        install: true
+        cache: true
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Check
+      run: task check
+
+    - name: Commit and Push
+      uses: ./.github/actions/commit-and-push
+      with:
+        commit-message: "Auto fix code by `task check`"
+        github-token: ${{ secrets.GITHUB_TOKEN }}
