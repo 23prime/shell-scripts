@@ -31,7 +31,7 @@ jobs:
       run: task sh:fmt
 
     - name: Commit and Push
-      uses: ./.github/actions/commit-and-push
+      uses: 23prime/simple-commit-and-push@v1
       with:
         commit-message: "Auto fix code by `task sh:fmt`"
         github-token: ${{ secrets.GITHUB_TOKEN }}
