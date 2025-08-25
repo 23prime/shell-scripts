@@ -16,7 +16,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Dependabot Auto Approve and Merge
         uses: 23prime/simple-dependabot-auto-approve-and-merge@v1
