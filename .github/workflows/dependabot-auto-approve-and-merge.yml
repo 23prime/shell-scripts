@@ -19,7 +19,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Dependabot Auto Approve and Merge
-        uses: ./.github/actions/auto-approve-and-merge
+        uses: 23prime/simple-dependabot-auto-approve-and-merge@v1
         with:
           pr-url: ${{ github.event.pull_request.html_url }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
