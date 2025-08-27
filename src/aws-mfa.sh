@@ -5,7 +5,7 @@ set -eu
 # Show help if --help is present
 if [[ "$*" == *--help* ]]; then
     cat <<EOF
-Usage: aws_mfa <device_arn> [mfa_profile]
+Usage: aws-mfa <device_arn> [mfa_profile]
 
 Arguments:
   device_arn    MFA device ARN (required)
@@ -26,7 +26,7 @@ done
 
 # Validate arguments
 if [ $# -lt 1 ] || [ $# -gt 2 ]; then
-    printf "[ERROR] aws_mfa: Invalid arguments.\nUsage: aws_mfa <device_arn> [mfa_profile]\n" >&2
+    printf "[ERROR] aws-mfa: Invalid arguments.\nUsage: aws-mfa <device_arn> [mfa_profile]\n" >&2
     exit 1
 fi
 
