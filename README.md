@@ -17,3 +17,17 @@ task link -- ~/bin   # Link to ~/bin
 ```
 
 **Note:** To remove symlinks, please delete them manually from the target directory.
+
+### Others
+
+- Show links
+
+    ```bash
+    task link:ls
+    ```
+
+- Remove broken links
+
+    ```bash
+    task link:rm
+    ```
