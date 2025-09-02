@@ -1,73 +1,74 @@
-version: '3'
+version: "3"
 
 tasks:
   # General tasks
   setup:
-    desc: 'Setup tools'
+    desc: "Setup tools"
     cmds:
-    - mise install
+      - mise install
 
   versions:
-    desc: 'Show tool versions'
+    desc: "Show tool versions"
     cmds:
-    - shellcheck --version
-    - shfmt --version
-    - markdownlint --version
-    - actionlint --version
+      - shellcheck --version
+      - shfmt --version
+      - markdownlint --version
+      - actionlint --version
 
   link:
-    desc: 'Create symlinks'
+    desc: "Create symlinks"
     cmds:
-    - chmod +x ./link.sh
-    - ./link.sh {{.CLI_ARGS}}
+      - chmod +x ./link.sh
+      - ./link.sh {{.CLI_ARGS}}
 
   link:rm:
-    desc: 'Remove symlinks'
+    desc: "Remove symlinks"
     cmds:
-    - chmod +x ./link-rm.sh
-    - ./link-rm.sh {{.CLI_ARGS}}
+      - chmod +x ./link-rm.sh
+      - ./link-rm.sh {{.CLI_ARGS}}
 
   link:ls:
-    desc: 'List symlinks'
+    desc: "List symlinks"
     cmds:
-    - chmod +x ./link-ls.sh
-    - ./link-ls.sh {{.CLI_ARGS}}
+      - chmod +x ./link-ls.sh
+      - ./link-ls.sh {{.CLI_ARGS}}
 
   check:
-    desc: 'Check'
+    desc: "Check"
     deps:
-    - sh:check
-    - md:check
-    - github:validate-workflow
+      - sh:check
+      - md:check
+      - yml:check
+      - github:validate-workflow
 
   # Shell tasks
   sh:check:
-    desc: 'Check shell scripts'
+    desc: "Check shell scripts"
     cmds:
-    - task: sh:fmt
-    - task: sh:lint
+      - task: sh:fmt
+      - task: sh:lint
 
   sh:lint:
-    desc: 'Lint shell scripts'
+    desc: "Lint shell scripts"
     cmds:
-    - shellcheck src/*.sh
+      - shellcheck src/*.sh
 
   sh:fmt:
-    desc: 'Format shell scripts'
+    desc: "Format shell scripts"
     cmds:
-    - shfmt -i 4 -w src/*.sh
+      - shfmt -i 4 -w src/*.sh
 
   # Markdown linting tasks
   md:check:
     desc: "Check Markdown"
     cmds:
-    - task: md:fix
-    - task: md:lint
+      - task: md:fix
+      - task: md:lint
 
   md:fix:
     desc: "Auto fix Markdown"
     cmds:
-    - task: md:lint-fix
+      - task: md:lint-fix
 
   md:lint:
     desc: "Run markdownlint on project markdown files"
@@ -76,6 +77,17 @@ tasks:
   md:lint-fix:
     desc: "Fix markdownlint issues automatically"
     cmd: markdownlint *.md --fix
+
+  # YAML tasks
+  yml:check:
+    desc: "Check YAML"
+    cmds:
+      - task: yml:lint
+
+  yml:lint:
+    desc: "Lint YAML"
+    cmds:
+      - yamllint .
 
   # GitHub Actions tasks
   github:validate-workflow:
