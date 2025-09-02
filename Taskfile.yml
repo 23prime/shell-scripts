@@ -18,11 +18,15 @@ tasks:
   list:
     desc: List all tasks
     cmd: task --list
+    aliases:
+      - l
 
   setup:
     desc: "Setup project"
     cmds:
       - task: mise:setup
+    aliases:
+      - s
 
   check:
     desc: "Check"
@@ -32,3 +36,5 @@ tasks:
       - json:fmt
       - md:check
       - gh:check
+    aliases:
+      - c
