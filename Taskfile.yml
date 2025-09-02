@@ -7,6 +7,7 @@ includes:
   json: tasks/JsonTasks.yml
   md: tasks/MarkdownTasks.yml
   gh: tasks/GitHubTasks.yml
+  link: tasks/LinkTasks.yml
 
 tasks:
   default:
