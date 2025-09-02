@@ -2,18 +2,18 @@
   "line-length": {
     "line_length": 320,
     "heading_line_length": 120,
-    "code_block_line_length": 120
+    "code_block_line_length": 120,
   },
   "no-inline-html": {
-    "allowed_elements": ["system-reminder"]
+    "allowed_elements": ["system-reminder"],
   },
   "ul-style": {
-    "style": "dash"
+    "style": "dash",
   },
   "emphasis-style": {
-    "style": "asterisk"
+    "style": "asterisk",
   },
   "strong-style": {
-    "style": "asterisk"
-  }
+    "style": "asterisk",
+  },
 }
