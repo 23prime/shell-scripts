@@ -1,0 +1,12 @@
+version: "3"
+
+tasks:
+  check:
+    desc: "Check YAML"
+    cmds:
+      - task: lint
+
+  lint:
+    desc: "Lint YAML"
+    cmds:
+      - yamllint .

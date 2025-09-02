@@ -1,95 +1,33 @@
 version: "3"
 
+includes:
+  mise: tasks/MiseTasks.yml
+  sh: tasks/ShellTasks.yml
+  yml: tasks/YamlTasks.yml
+  json: tasks/JsonTasks.yml
+  md: tasks/MarkdownTasks.yml
+  gh: tasks/GitHubTasks.yml
+
 tasks:
-  # General tasks
+  default:
+    cmds:
+      - task: list
+      - task: mise:versions
+
+  list:
+    desc: List all tasks
+    cmd: task --list
+
   setup:
-    desc: "Setup tools"
+    desc: "Setup project"
     cmds:
-      - mise install
-
-  versions:
-    desc: "Show tool versions"
-    cmds:
-      - shellcheck --version
-      - shfmt --version
-      - markdownlint --version
-      - actionlint --version
-
-  link:
-    desc: "Create symlinks"
-    cmds:
-      - chmod +x ./link.sh
-      - ./link.sh {{.CLI_ARGS}}
-
-  link:rm:
-    desc: "Remove symlinks"
-    cmds:
-      - chmod +x ./link-rm.sh
-      - ./link-rm.sh {{.CLI_ARGS}}
-
-  link:ls:
-    desc: "List symlinks"
-    cmds:
-      - chmod +x ./link-ls.sh
-      - ./link-ls.sh {{.CLI_ARGS}}
+      - task: mise:setup
 
   check:
     desc: "Check"
     deps:
       - sh:check
-      - md:check
       - yml:check
-      - github:validate-workflow
-
-  # Shell tasks
-  sh:check:
-    desc: "Check shell scripts"
-    cmds:
-      - task: sh:fmt
-      - task: sh:lint
-
-  sh:lint:
-    desc: "Lint shell scripts"
-    cmds:
-      - shellcheck src/*.sh
-
-  sh:fmt:
-    desc: "Format shell scripts"
-    cmds:
-      - shfmt -i 4 -w src/*.sh
-
-  # Markdown linting tasks
-  md:check:
-    desc: "Check Markdown"
-    cmds:
-      - task: md:fix
-      - task: md:lint
-
-  md:fix:
-    desc: "Auto fix Markdown"
-    cmds:
-      - task: md:lint-fix
-
-  md:lint:
-    desc: "Run markdownlint on project markdown files"
-    cmd: markdownlint *.md
-
-  md:lint-fix:
-    desc: "Fix markdownlint issues automatically"
-    cmd: markdownlint *.md --fix
-
-  # YAML tasks
-  yml:check:
-    desc: "Check YAML"
-    cmds:
-      - task: yml:lint
-
-  yml:lint:
-    desc: "Lint YAML"
-    cmds:
-      - yamllint .
-
-  # GitHub Actions tasks
-  github:validate-workflow:
-    desc: "Validate GitHub Actions workflow"
-    cmd: actionlint .github/workflows/*.yml
+      - json:fmt
+      - md:check
+      - gh:check

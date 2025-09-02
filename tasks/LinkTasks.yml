@@ -1,0 +1,20 @@
+version: "3"
+
+tasks:
+  link:
+    desc: "Create symlinks"
+    cmds:
+      - chmod +x ./link.sh
+      - ./link.sh {{.CLI_ARGS}}
+
+  link:rm:
+    desc: "Remove symlinks"
+    cmds:
+      - chmod +x ./link-rm.sh
+      - ./link-rm.sh {{.CLI_ARGS}}
+
+  link:ls:
+    desc: "List symlinks"
+    cmds:
+      - chmod +x ./link-ls.sh
+      - ./link-ls.sh {{.CLI_ARGS}}
