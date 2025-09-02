@@ -4,17 +4,17 @@ tasks:
   create:
     desc: "Create symlinks"
     cmds:
-      - chmod +x ./link.sh
-      - ./link.sh {{.CLI_ARGS}}
+      - chmod +x ./tools/link.sh
+      - ./tools/link.sh {{.CLI_ARGS}}
 
   rm:
     desc: "Remove symlinks"
     cmds:
-      - chmod +x ./link-rm.sh
-      - ./link-rm.sh {{.CLI_ARGS}}
+      - chmod +x ./tools/link-rm.sh
+      - ./tools/link-rm.sh {{.CLI_ARGS}}
 
   ls:
     desc: "List symlinks"
     cmds:
-      - chmod +x ./link-ls.sh
-      - ./link-ls.sh {{.CLI_ARGS}}
+      - chmod +x ./tools/link-ls.sh
+      - ./tools/link-ls.sh {{.CLI_ARGS}}
