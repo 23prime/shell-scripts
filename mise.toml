@@ -10,5 +10,8 @@ yamllint = "latest"
 # Markdown
 "npm:markdownlint-cli" = "latest"
 
+# JSON
+biome = "latest"
+
 # GitHub Actions
 actionlint = "latest"
