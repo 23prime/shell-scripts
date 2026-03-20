@@ -1,0 +1,6 @@
+guake
+myorg
+myuser
+shfmt
+xtype
+zstd
