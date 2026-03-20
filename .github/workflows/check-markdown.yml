@@ -1,0 +1,43 @@
+name: Check Markdown
+
+on:
+  push:
+    paths:
+      - "**/*.md"
+      - ".github/workflows/check-markdown.yml"
+      - ".markdownlint-cli2.jsonc"
+  pull_request:
+    paths:
+      - "**/*.md"
+      - ".github/workflows/check-markdown.yml"
+      - ".markdownlint-cli2.jsonc"
+
+permissions:
+  contents: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Install mise and setup
+        uses: jdx/mise-action@v4
+        with:
+          install: true
+          install_args: "markdownlint-cli2"
+          cache: true
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Fix
+        run: mise md-fix
+
+      - name: Commit and Push
+        uses: 23prime/simple-commit-and-push@v1
+        with:
+          commit-message: "Auto fix by workflow"
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Check
+        run: mise md-check
