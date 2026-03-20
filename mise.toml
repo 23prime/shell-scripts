@@ -1,17 +1,86 @@
-[tools]
-# Shell
-shellcheck = "0.10"
-shfmt = "3"
+# ================================================================
+# Settings
+# ================================================================
+[settings]
+auto_install = false
 
-# YAML
-uv = "latest"       # for install yamllint
-yamllint = "latest"
+
+# ================================================================
+# Tools
+# ================================================================
+[tools]
 
 # Markdown
-"npm:markdownlint-cli" = "latest"
-
-# JSON
-biome = "latest"
+markdownlint-cli2 = "latest"
 
 # GitHub Actions
 actionlint = "latest"
+shellcheck = "latest"
+
+# Shell
+shfmt = "3"
+
+# Other tools
+lefthook = "latest"
+cspell = "latest"
+
+
+# ================================================================
+# Tasks
+# See: https://mise.jdx.dev/tasks/toml-tasks.html
+# ================================================================
+
+# Global
+[tasks.setup]
+description = "Setup tools"
+run = ["mise trust -yq", "mise install", "lefthook install"]
+alias = "s"
+
+[tasks.fix]
+description = "Fix all issues"
+depends = ["md-fix"]
+alias = "f"
+
+[tasks.check]
+description = "Check for all issues"
+depends = ["md-check", "gh-check", "spell-check"]
+alias = "c"
+
+[tasks.fix-and-check]
+run = [{ task = "fix" }, { task = "check" }]
+description = "Fix all issues and check for issues"
+alias = "fc"
+
+# Markdown
+[tasks.md-fix]
+description = "Fix Markdown issues"
+run = "markdownlint-cli2 '**/*.md' --fix"
+alias = "mf"
+
+[tasks.md-check]
+description = "Check for Markdown issues"
+run = "markdownlint-cli2 '**/*.md'"
+alias = "mc"
+
+# GitHub Actions
+[tasks.gh-check]
+description = "Check GitHub Actions workflows"
+run = "actionlint .github/workflows/*.yml"
+alias = "ghc"
+
+# Spell Check
+[tasks.spell-check]
+description = "Check spelling"
+run = "cspell . --gitignore --verbose"
+alias = "sc"
+
+# Shell
+[tasks.sh-fix]
+description = "Fix shell script issues"
+run = "shfmt -i 4 -w ."
+alias = "shf"
+
+[tasks.sh-check]
+description = "Check shell script issues"
+run = "shellcheck src/*.sh"
+alias = "shc"

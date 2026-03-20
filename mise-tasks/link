@@ -1,4 +1,6 @@
 #!/bin/bash
+#MISE description="Link scripts to PATH"
+#MISE alias="l"
 
 set -eu
 

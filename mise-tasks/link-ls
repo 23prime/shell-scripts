@@ -1,4 +1,6 @@
 #!/bin/bash
+#MISE description="List symlinks"
+#MISE alias="ll"
 
 set -eu
 

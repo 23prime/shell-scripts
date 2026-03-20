@@ -1,4 +1,6 @@
 #!/bin/bash
+#MISE description="Remove broken symlinks"
+#MISE alias="lr"
 
 set -eu
 
