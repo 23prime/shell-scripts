@@ -1,5 +1,6 @@
 guake
 myorg
+myrepo
 myuser
 shfmt
 xtype
