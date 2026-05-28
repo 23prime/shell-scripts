@@ -58,7 +58,7 @@ query($owner: String!, $repo: String!, $cursor: String) {
             }
           }
         }
-        reviews(first: 100) {
+        reviews(first: 100) { # PRs with more than 100 reviews may produce false positives
           nodes {
             author { login }
             state
