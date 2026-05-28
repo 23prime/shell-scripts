@@ -32,7 +32,7 @@ REPO="$1"
 OWNER="${REPO%%/*}"
 REPO_NAME="${REPO##*/}"
 
-if [[ -z "$OWNER" || -z "$REPO_NAME" || "$REPO" != */* ]]; then
+if [[ -z "$OWNER" || -z "$REPO_NAME" || "$OWNER/$REPO_NAME" != "$REPO" ]]; then
     echo "Error: invalid format '$REPO'. Expected owner/repo" >&2
     exit 1
 fi
